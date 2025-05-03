@@ -22,7 +22,7 @@ Otherwise, this has design lineage through a few earlier designs I cooked up but
 * 17 keys in the standard layout so you can use pretty much any standard-layout numeric keypad caps.
 * 2 rotary encoders with push-buttons.
 * ATMega32u4 processor
-* MicroUSB port
+* USB-C port
 * Extra ESD protection diodes and a polyfuse for durability
 * Programming port that you shouldn't actually need to ever use.
 * 9 4-pin SK6812 "NeoPixel" RGB LEDs pointed downward for underglow
@@ -47,6 +47,8 @@ Col -> Row
 
 Neopixel: PB7
 
+Numlock LED: PF7
+
 ## BOM
 
 |Reference	 |Quantity	 |Value	 |Footprint|
@@ -58,19 +60,22 @@ Neopixel: PB7
 |C5,C6,C7,C8 	| 4	| 0.1 uF	| 0805 | 
 |D1,D2,D3,D4,D5,D6,D7,D9,D10,D11,D12,D13,D14,D15,D16,D17,D18,D27,D28 | 19	1N4148	| SOD123 / Axial |
 |D19,D20,D21,D22,D23,D24,D25,D26,D29 	| 9	| SK6812	| 5050 PLCC4 |
+|D30    | 1 | 5mm LED | |
 |D8 	| 1	| PRTR5V0U2X_215	| TO-253-4 |
 |F1 	| 1	| 500 mA Polyfuse	| 1206 |
 |H1-H6 	| 6	| Mounting Hole	| M2.5 |
-|J1 	| 1	| MicroUSB	| Amphenol 10103594-0001LF |
+|J1 	| 1	| MicroUSB	| GCT USB4085-GF-A |
 |J2 	| 1	| AVR-ISP-6	| 2x03 2.54mm pitch vertical SMD |
 |MX1,MX2,MX3,MX4,MX5,MX6,MX7,MX9,MX10,MX11,MX12,MX13,MX14,MX17 | 14	| Cherry MX	|1U |
 |MX8 MX15 	| 2	| Cherry MX	| 2U Vertical |
 |MX16 	| 1	| Cherry MX	| 2U Horizontal |
-|R1 	| 1	| 1M | 0805 |
-|R2,R3 	| 2	| 22 | 0805 |
+|R1 	| 1	| 1M | 0603 |
+|R2,R3 	| 2	| 22 | 0603 |
 |R4,R5	| 2	| 10k | 0805 |
-|R7 | 1	| 1 M | 0805 |
-|S1 | 1	| Toggle switch	| RS-187R05A2-DS MT RT | 
+|R6,R8  | 2 | 5.1k | 0603 | 
+|R7 | 1	| 1 M | 0603 |
+|R9,R10 | 1	| 330 | 0805 |
+|S1 | 1	| Toggle switch	| C&K KSR223GLFG | 
 |SW1,SW2 | 2	| Rotary_Encoder_Switch	| PEC11R-4215F-S0024-0-0-0 |
 |U1 | 1	| ATMEGA32U4 | TQFP-44 |
 |Y1 | 1	| 16 MHz | HC49-U |
@@ -107,13 +112,17 @@ This will appear later, still working on it!
 
 ### v1.0 rev 1
 
+### v1.0 rev 2
+
+* MicroUSB replaced with USB-C
+* RS-187R05A2-DS button replaced with KSR223G LFG
+* RG-49 Crystal a 3.2x2.5mm SMT 
+* KiCAD 6.x instead of KiCAD 5.x
+
 ### Things I would change next time
 
 * I might try to trim a few mm off of each of the edges.
-* I used an Amphenol 10103594-0001LF connector for Micro USB.  They are better than a lot of the Micro USB connectors but there's some nice USB-C connectors that look even a little bit sturdier out there these days.
-* I used a 5.2mm tactile switch that was from all of the designs I was making around this point in time.  These days, I'd probably use a reset button that's smaller yet actually a bit nicer.
 * I might remove the hybrid SOD123/Axial feature because I actually solder SOD123's faster than I solder axial parts these days.
-* I might throw in a num-lock LED and maybe a few NeoPixels on the top side for more light funs.
 * The programming port is kinda annoying in the layout and I guess I need to look at more alternatives in the rare case you need to bootloader it.
 
 ## License
